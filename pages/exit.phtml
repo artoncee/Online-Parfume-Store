@@ -1,0 +1,9 @@
+<?php
+$log=$_SESSION["login"];
+$id=$_SESSION["id"];
+unset($log);
+unset($id);
+session_destroy();
+
+include("index.phtml");
+?>

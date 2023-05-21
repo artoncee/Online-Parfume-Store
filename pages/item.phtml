@@ -1,0 +1,67 @@
+<?php
+
+$servername = "localhost";
+$database = "parfumes";
+$username = "root";
+$password = "";
+
+$id_parf=$_GET["id_parf"];
+
+$conn = mysqli_connect($servername, $username, $password, $database);
+mysqli_query($conn, "SET NAMES 'utf8'");
+
+$strSQL1="SELECT id_parf FROM parfume WHERE id_parf=".$id_parf;
+$result=mysqli_query($conn,$strSQL1) or die ("Не могу выполнить запрос");
+
+$strSQL1="SELECT id_parf,name_parf, top_notes, middle_notes, lower_notes, name_cat, name_type, parfume.id_type, country,
+       info, size, price,info, image, parfume.id_brend, name_brend FROM parfume, brend, categories,type WHERE parfume.id_brend=brend.id_brend AND parfume.id_type=type.id_type AND parfume.id_cat=categories.id_cat AND parfume.id_parf=".$id_parf;
+
+$result1=mysqli_query($conn, $strSQL1) or die ("че");
+?>
+
+<?php  include("template/header.phtml"); ?>
+
+<?php  while ($row=mysqli_fetch_array($result1)):
+    ?>
+    <link rel="stylesheet" href="../css/parf.css">
+
+    <section class="about">
+        <div class="row">
+            <div class="image-container">
+                <img src='../<?php print $row["image"];?>' alt="">
+
+            </div>
+
+            <!-- текстовая часть -->
+            <div class="content">
+                <h3 class="brend"><?php print $row["name_brend"]?></h3>
+                <h3 class="parf"><?php print $row["name_parf"]?></h3>
+
+                <div><a><?php print $row["size"]?></a></div>
+                <a class="size">объем/мл</a>
+                <h3 class="price"><?php print $row["price"]?> ₽</h3>
+                <a href="dobasket.phtml?type=1&id_parf=<?php print $row["id_parf"]; ?>" class="btn">Добавить в корзину</a>
+
+            </div>
+        </div>
+        <div class="credit"></div>
+    </section>
+
+
+    <section class="info">
+        <a>Описание</a>
+        <p><?php print $row["info"]?></p>
+        <a class="har">Подробные характеристики</a>
+        <div class="etc">
+            <a>Тип продукта.....................<span><?php print $row["name_cat"]?></span></a>
+            <a>Для кого..............................<span><?php print $row["name_type"]?></span></a>
+            <a>Верхние ноты.....................<span><?php print $row["top_notes"]?></span></a>
+            <a>Средние ноты.....................<span><?php print $row["middle_notes"]?></span></a>
+            <a>Нижние ноты......................<span><?php print $row["lower_notes"]?></span></a>
+            <a>Страна производства.........<span><?php print $row["country"]?></span></a>
+        </div>
+    </section>
+
+<?php endwhile;?>
+    <link rel="stylesheet" href="../css/styles.css">
+<?php  include("template/footer.phtml"); ?>

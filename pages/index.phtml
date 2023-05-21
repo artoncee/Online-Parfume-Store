@@ -1,0 +1,167 @@
+
+<?php include("template/header.phtml"); ?>
+<!-- главная -->
+<section class="home" id="home">
+    <div class="slider middle">
+        <div class="slides">
+            <input type="radio" name="r" id="r1" checked>
+            <input type="radio" name="r" id="r2">
+            <input type="radio" name="r" id="r3">
+            <input type="radio" name="r" id="r4">
+
+            <div class="slide s1"><img src="../images/home3.jpg" alt=""></div>
+            <div class="slide"><img src="../images/home44.jpg" alt=""></div>
+            <div class="slide"><img src="../images/test.jpg" alt=""></div>
+            <div class="slide"><img src="../images/call.png" alt=""></div>
+        </div>
+
+        <div class="navigation">
+            <label for="r1" class="bar"></label>
+            <label for="r2" class="bar"></label>
+            <label for="r3" class="bar"></label>
+            <label for="r4" class="bar"></label>
+        </div>
+
+
+    </div>
+
+    <div class="content">
+        <h3>Последние новинки</h3>
+        <p><a href="#products" class="btn">Купить сейчас</a></p>
+    </div>
+</section>
+
+<!-- поле о нас -->
+<section class="about" id="about">
+
+
+    <div class="row">
+
+        <!-- Вставка видео -->
+        <div class="video-container">
+            <video src="../images/video1.mp4" loop autoplay muted></video>
+        </div>
+
+        <!-- текстовая часть -->
+        <div class="content">
+            <h3>Почему выбирают именно нас?</h3>
+            <p> Мы объединяемся с зарубежными производителями и партнерами для того,
+                чтобы производить только качественную продукцию, отвечающую всем
+                современным требованиям.  </p>
+            <p>Наша команда – это команда увлеченных профессионалов,
+                c главным принципом клиенто- орентированности в работе.
+                Мы работаем для того, чтобы каждая женщина могла прикоснуться
+                к миру профессиональной индустрии красоты, и сделать этот мир
+                чуточку прекраснее.
+            </p>
+
+            <a href="about.phtml" class="btn">Узнать больше</a>
+        </div>
+    </div>
+</section>
+
+<!-- для иконок -->
+<section class="icons-container">
+    <div class="icons">
+        <img src="../images/delivery.png" alt="">
+        <div class="info">
+            <h3>Бесплатная доставка</h3>
+            <span>по всей России</span>
+        </div>
+    </div>
+
+    <div class="icons">
+        <img src="../images/original.png" alt="">
+        <div class="info">
+            <h3>Гарантия качества</h3>
+            <span>оригинальная парфюмерия</span>
+        </div>
+    </div>
+
+    <div class="icons">
+        <img src="../images/gift.png" alt="">
+        <div class="info">
+            <h3>Подарочные карты</h3>
+            <span>для любимых и близких</span>
+        </div>
+    </div>
+
+    <div class="icons">
+        <img src="../images/credit-card.png" alt="">
+        <div class="info">
+            <h3>Беопасная оплата</h3>
+            <span>Visa/MasterCard</span>
+        </div>
+    </div>
+
+</section>
+
+
+<!-- каталог -->
+
+<section class="products" id="products">
+    <?php include("template/categories.phtml"); ?>
+    <div class="box-container">
+
+        <div class="box">
+            <span class="discount">-10%</span>
+            <div class="image">
+                <img src="../img_parf/3.jpg" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart"></a>
+                </div>
+            </div>
+            <div class="content">
+                <h3>Parfume</h3>
+                <div class="price">36.000<span>39.600</span></div>
+            </div>
+        </div>
+
+        <div class="box">
+            <span class="discount">-15%</span>
+            <div class="image">
+                <img src="../img_parf/8.jpg" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart"></a>
+                </div>
+            </div>
+            <div class="content">
+                <h3>Parfume</h3>
+                <div class="price">36.000 ₽<span>39.600 ₽</span></div>
+            </div>
+        </div>
+
+        <div class="box">
+            <span class="discount">-10%</span>
+            <div class="image">
+                <img src="../img_parf/20.jpg" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart"></a>
+                </div>
+            </div>
+            <div class="content">
+                <h3>Parfume</h3>
+                <div class="price">36.000 ₽<span>39.600 ₽</span></div>
+            </div>
+        </div>
+
+        <div class="box">
+            <span class="discount">-10%</span>
+            <div class="image">
+                <img src="../img_parf/30.jpg" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart"></a>
+                </div>
+            </div>
+            <div class="content">
+                <h3>Parfume</h3>
+                <div class="price">36.000 ₽<span>39.600 ₽</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<?php  include("template/footer.phtml"); ?>
+

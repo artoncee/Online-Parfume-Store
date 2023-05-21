@@ -1,0 +1,50 @@
+<?php
+
+$pass= str_replace("'", "", $_POST["pass"]);
+// $pass=$_POST["pass"];
+$log=$_POST["login"];
+
+$servername = "localhost";
+$database = "parfumes";
+$username = "root";
+$password = "";
+
+
+
+
+
+$conn = mysqli_connect($servername, $username, $password, $database);
+if (!$conn) {
+    die("Соединение провалено по причине: " . mysqli_connect_error());
+}
+echo "";
+mysqli_query($conn, "SET NAMES 'utf8'");
+
+$strSQL1="SELECT * FROM customers WHERE login='".$log."' AND pass='".$pass."'";
+$result1=mysqli_query($conn, $strSQL1) or die();
+
+
+if($row=mysqli_fetch_array($result1)){
+    $start=session_start();
+    $_SESSION['login']=$row["fam"]." ".$row["im"];
+    $_SESSION['id']=$row["id_cust"];
+    $message=" ";
+    $success=true;
+}
+else{
+    $message="Таких данных не существует";
+}
+
+if($success){ ?>
+    <a class="messagelog"><?php print $message; ?></a>
+    <?php
+    include ("cabinet.phtml");
+
+}
+else{
+    include("template/header.phtml"); ?>
+    <a class="messagelog"><?php print $message; ?></a>
+    <?php
+}
+?>
+

@@ -1,0 +1,53 @@
+<?php
+$log=$_SESSION["login"];
+$id=$_SESSION["id"];
+$id_bask=$_COOKIE["id_bask"];
+$dostavka=$_POST["dostavka"];
+$bonus=$_POST["bonus"];
+
+$servername = "localhost";
+$database = "parfumes";
+$username = "root";
+$password = "";
+
+$conn = mysqli_connect($servername, $username, $password, $database);
+if (!$conn) {
+    die("Соединение провалено по причине: " . mysqli_connect_error());
+}
+echo "";
+mysqli_query($conn, "SET NAMES 'utf8'");
+
+
+if(!isset($log)) $message="Вы не автоизованы";
+else{
+    $strSQL1="SELECT COUNT(*) as count FROM basket_parfume WHERE id_bask='".$id_bask."'";
+    $result1=mysqli_query($conn, $strSQL1) or die ("Не могу выполнить запрос");
+    $row=mysqli_fetch_array($result1);
+    if($row["count"]==0) $message="Ваша корзина пуста";
+    else{
+        $order=uniqid("OR");
+        $strSQL="INSERT INTO orders(id_order, date_ord, id_cust, dostavka, bonus) VALUES ('".$order."', CURDATE(), '".$id."', '".$dostavka."','".$bonus."')";
+        mysqli_query($conn, $strSQL) or die ("");
+        $strSQL="SELECT * FROM basket_parfume WHERE id_bask='".$id_bask."'";
+        $result=mysqli_query($conn, $strSQL) or die ("");
+        while ($row=mysqli_fetch_array($result)){
+            $strSQL="INSERT INTO order_parfume(id_order, id_parf, kolvo) VALUES ('".$order."', ".$row["id_parf"].",".$row["kolvo"]." )";
+            mysqli_query($conn, $strSQL) or die ("");
+        }
+        $strSQL="DELETE FROM basket_parfume WHERE id_bask='".$id_bask."'";
+        mysqli_query($conn, $strSQL) or die ("");
+        $uniqID=uniqid("ID");
+        setcookie("id_bask", $uniqID, time()+60*60*24*14);
+        $message="Ваш заказ отправлен";
+    }
+}
+include("template/header.phtml");
+?>
+<section class="doOrder">
+    <a><?php print $message; ?></a>
+</section>
+<?php
+include("template/footer.phtml");
+?>
+
+

@@ -1,0 +1,126 @@
+<?php include ("template/header.phtml");?>
+<link rel="stylesheet" href="../../css/cabinet.css">
+<?php
+$message="";
+
+$log=$_SESSION["login"];
+$id=$_SESSION["id"];
+
+
+
+if(!isset($log) ){
+    $success=false;
+    $message=" ";
+    include ("login.phtml");
+}
+else
+    $success=true;
+
+
+include ("template/header.phtml");
+print $message;
+
+if($success){
+
+    $servername = "localhost";
+    $database = "parfumes";
+    $username = "root";
+    $password = "";
+
+    $conn = mysqli_connect($servername, $username, $password, $database);
+    if (!$conn) {
+        die("Соединение провалено по причине: " . mysqli_connect_error());
+    }
+    echo "";
+
+    $strSQL1="SELECT * FROM customers WHERE id_cust='".$id."'";
+    $result1=mysqli_query($conn, $strSQL1) or die ("");
+    if($row=mysqli_fetch_array($result1)){
+}
+?>
+
+
+<div class="hello">
+   <a>Добро пожаловать в ваш личный кабинет!</a>
+   <a></a>
+</div>
+
+<section class="cab" id="cab">
+  <h3>Ваши личные данные</h3>
+  <div class="row">
+      <form action="template/change.phtml" method="post">
+         <input type="text" name="fam" value="<?php print $row["fam"] ?>"  class="box">
+         <input type="text" name="im" value="<?php print $row["im"] ?>" placeholder="Имя" class="box">
+         <input type="text" name="addr" value="<?php print $row["addr"] ?>" placeholder="Адрес" class="box">
+         <input type="text" name="mail" value="<?php print $row["mail"]?>" placeholder="Е-mail" class="box">
+
+         <input type="submit" value="Сохранить изменения" class="btn">
+     </form>
+ </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="cab" id="cab">
+    <h3>Ваши заказы</h3>
+    <?php
+    $strSQL1="SELECT id_order, date_ord FROM orders WHERE id_cust='".$id."' ORDER BY date_ord DESC";
+    $result1=mysqli_query($conn, $strSQL1) or die ("");
+    while ($row1=mysqli_fetch_array($result1)) {
+        $order = $row1["id_order"];
+        $strSQL2 = "SELECT  name_brend, name_parf, size, price, image, kolvo, id_order, parfume.id_parf FROM parfume, order_parfume, brend WHERE parfume.id_brend=brend.id_brend AND parfume.id_parf=order_parfume.id_parf AND id_order='" . $order . "'";
+        $result2 = mysqli_query($conn, $strSQL2) or die ("");
+    ?>
+    <tr><td><hr>
+            <b style="font-size: 20px;">Заказ № <?php print $order;?> от <?php print $row1["date_ord"]; ?> <br></b>
+        <table style="width: 80rem; border: 1px solid blueviolet; font-size: 20px; background: ghostwhite;">
+            <tr>
+                <td style="border-bottom: 1px dotted #333333; width: 50rem; height: 5rem; padding-left: 2rem;"><i>Бренд: </i></td>
+                <td style="border-bottom: 1px dotted #333333; width: 40rem; height: 5rem;"><i>Название: </i></td>
+                <td style="border-bottom: 1px dotted #333333; width: 20rem; height: 5rem;"><i>Цена: </i></td>
+                <td style="border-bottom: 1px dotted #333333; width: 5rem; height: 5rem; padding-right: 2rem;"><i>Количество: </i></td>
+            </tr>
+            <?php
+            $sum=0;
+            while ($row2=mysqli_fetch_array($result2)){
+            ?>
+            <tr><td style="width: 40rem; height: 5rem; padding-left: 2rem;"><?php print $row2["name_brend"]; ?></td>
+                <td style="width: 30rem; height: 5rem;"><?php print $row2["name_parf"]; ?></td>
+                <td style="width: 20rem; height: 5rem;"><?php print $row2["price"]; ?></td>
+                <td style="width: 10rem; height: 5rem; "><?php print $row2["kolvo"]; ?></td>
+            </tr>
+            <?php $sum=$sum+$row2["price"]*$row2["kolvo"];
+            } ?>
+            <tr><td style="border-top: 1px dotted #333333; padding-top: 1rem; padding-bottom: 1rem;"></td><td style="padding-top: 1rem; padding-bottom: 1rem; border-top: 1px dotted #333333;"><i>ИТОГО: </i><a><?php print $sum; ?></a></td>
+                <td style="border-top: 1px dotted #333333; padding-top: 1rem; padding-bottom: 1rem;"></td>
+                <td style="border-top: 1px dotted #333333; padding-top: 1rem; padding-bottom: 1rem;"></td></tr>
+        </table>
+        </td></tr>
+        <div style="height: 5rem;">
+        </div>
+        <?php } }?>
+
+
+
+</section>
+
+
+
+
+<?php
+include ("template/footer.phtml");
+?>
+
+

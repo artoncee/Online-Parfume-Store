@@ -1,0 +1,62 @@
+<?php
+header("Cache-control: no-cache");
+$id_bask=$_COOKIE["id_bask"];
+if(! isset($id_bask))
+{
+    $uniq_ID=uniqid("ID");
+    setcookie("id_bask", $uniq_ID, time()+60*60*24*14);
+}
+else
+    setcookie("id_bassk", $id_bask, time()+60*60*24*14);
+?>
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин парфюмерных изделий</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+
+<body>
+
+<header>
+    <input type="checkbox" name="" id="toggler">
+    <label for="toggler" class="fas fa-bars"></label>
+    <a href="#" class="logo">SAF<span>.</span></a>
+    <nav class="navbar">
+        <a href="../pages/index.phtml">Главная</a>
+        <a href="../pages/about.phtml">Мы</a>
+        <a href="../pages/catalog.phtml?type=4">Каталог</a>
+        <!-- <a href="#contact">Контакты</a> -->
+    </nav>
+
+    <div class="icons">
+        <a href="#" class="fas fa-heart"></a>
+        <a href="../pages/basket.phtml" class="fas fa-shopping-cart"></a>
+        <?php
+        if(isset($_SESSION["login"])){
+
+            ?>
+            <a href="../pages/cabinet.phtml" class="fas fa-user"></a>
+            <a href="../pages/exit.phtml" class="fas fa-sign-out"></a>
+            <a><?php print $_SESSION["login"];?></a>
+
+        <?php
+        }
+        else{
+            ?>
+            <a href="../pages/login.phtml" class="fas fa-user"></a>
+        <?php
+        }
+        ?>
+
+
+    </div>
+</header>

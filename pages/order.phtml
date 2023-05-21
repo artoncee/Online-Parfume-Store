@@ -1,0 +1,101 @@
+<?php
+$id_bask=$_COOKIE["id_bask"];
+
+include ("template/header.phtml");
+
+$servername = "localhost";
+$database = "parfumes";
+$username = "root";
+$password = "";
+
+$conn = mysqli_connect($servername, $username, $password, $database);
+if (!$conn) {
+    die("Соединение провалено по причине: " . mysqli_connect_error());
+}
+echo "";
+mysqli_query($conn, "SET NAMES 'utf8'");
+
+$strSQL1="SELECT COUNT(*) as count FROM basket_parfume WHERE id_bask='".$id_bask."'";
+$result1=mysqli_query($conn, $strSQL1) or die ("");
+$row=mysqli_fetch_array($result1);
+if($row["count"]==0)
+{
+    $message="Ваша корзина пуста";
+}
+else
+{
+    $strSQL1="SELECT image, name_parf, size, price, kolvo, id_bask, parfume.id_parf FROM parfume, basket_parfume WHERE parfume.id_parf=basket_parfume.id_parf AND id_bask='".$id_bask."'";
+    $result1=mysqli_query($conn, $strSQL1) or die ("");
+    ?>
+
+
+
+<table style="margin-left: 10rem; margin-top: 10rem; width=1000rem; font-size: 16px;">
+<tr>
+    <td>
+        <table style=" border: 1px solid #333333; width: 100%;" >
+            <tr><td align="center" style="border: 1px solid #333333; font-size: 20px; color: blueviolet; width: 30rem;"><i>Название: </i></td>
+                <td align="center" style="border: 1px solid #333333; font-size: 20px; color: blueviolet; width: 20rem;"><i>Объем:</i></td>
+                <td align="center" style="border: 1px solid #333333; font-size: 20px; color: blueviolet; width: 20rem;"><i>Цена:</i></td>
+                <td align="center" style="border: 1px solid #333333; font-size: 20px; color: blueviolet; width: 20rem;"><i>Количество:</i></td>
+            </tr>
+            <?php
+            $sum=0;
+            while ($row=mysqli_fetch_array($result1))
+            {
+            ?>
+            <tr>
+                <td style="border: 1px solid #333333; font-size: 16px; padding-left: 1rem;"><?php print $row["name_parf"]; ?></td>
+                <td style="border: 1px solid #333333; font-size: 16px; padding-left: 1rem;"><?php print $row["size"]; ?></td>
+                <td style="border: 1px solid #333333; font-size: 16px; padding-left: 1rem;"><?php print $row["price"]; ?></td>
+                <td style="border: 1px solid #333333; font-size: 16px; padding-left: 1rem;"><?php print $row["kolvo"]; ?></td>
+            </tr>
+            <?php
+                $sum=$sum+$row["price"]*$row["kolvo"];
+            }
+            ?>
+            <tr><td></td>
+                <td></td>
+                <td></td>
+                <td align="center" style="font-size: 20px;"><a style="color: blueviolet">Итого: <span style="color: #333333"><?php if ($sum>15000) {$discount=$sum/10; $sum=$sum-$discount;} print $sum; ?></span>₽ </a></td>                <td></td>
+            </tr>
+        </table>
+
+        <tr><td  style="padding-top: 2rem"><b>Способ доставки: </b>
+            <label style="margin-left: 2rem;">
+                <input type="radio" value="1" name="dostavka" checked> почта России
+                <input type="radio" value="2" name="dostavka" > курьер
+                <input type="radio" value="3" name="dostavka" > самовывоз
+            </label>
+            </td>
+        </tr>
+
+
+
+        <tr><td style=" padding-top: 3rem; font-size: 16px;"> Прислать бесплатный каталог по теме:
+                <label>
+                    <select name="bonus" style="border:1px solid blueviolet;">
+                        <option value="0">
+                            <?php
+                            $strSQL1="SELECT * FROM categories";
+                            $result1=mysqli_query($conn, $strSQL1) or die ("Не могу выполнить запрос");
+                            while ($row=mysqli_fetch_array($result1)){
+                            ?>
+                        <option value="<?php print $row["id_cat"]; ?>">
+                            <?php print $row["name_cat"];
+                            }
+                            ?>
+                </label>
+        </tr>
+
+    <tr><td style="margin-left: 10rem; padding-top: 3rem;"><a class="btn" href="doOrder.phtml">Отправить заказ</a></td></tr>
+
+</table>
+
+                                                                                                                                                        <section></section><section></section><section></section><section></section><section></section>
+<?php
+}
+
+?>
+
+

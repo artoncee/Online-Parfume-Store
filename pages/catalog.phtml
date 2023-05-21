@@ -1,0 +1,106 @@
+<?php  include("template/header.phtml"); ?>
+<div class="probel"><a> </a></div>
+<section><?php include ("template/categories.phtml"); ?></section>
+
+
+
+<?php
+
+$servername = "localhost";
+$database = "parfumes";
+$username = "root";
+$password = "";
+
+
+
+
+$type=$_GET["type"];
+
+$conn = mysqli_connect($servername, $username, $password, $database);
+mysqli_query($conn, "SET NAMES 'utf8'");
+
+$strSQL1="";
+
+if($type==1)
+{
+    $id_brend=$_GET["id_brend"];
+    $strSQL1="SELECT name_brend FROM brend WHERE id_brend=".$id_brend;
+    $result=mysqli_query($conn,$strSQL1) or die ("Не могу выполнить запрос");
+    if($row=mysqli_fetch_array($result))
+    {
+        $title=$row["name_brend"];
+    }
+    $strSQL1="SELECT id_parf, image, name_parf, price,
+       parfume.id_brend, name_brend, parfume.id_cat, name_cat, parfume.id_type, name_type
+    FROM parfume, categories, type, brend WHERE parfume.id_cat=categories.id_cat AND parfume.id_brend=brend.id_brend  AND parfume.id_type=type.id_type AND parfume.id_brend=".$id_brend;
+}
+
+if($type==2)
+{
+    $id_cat=$_GET["id_cat"];
+    $strSQL1="SELECT name_cat FROM categories WHERE id_cat=".$id_cat;
+    $result=mysqli_query($conn,$strSQL1) or die ("Не могу выполнить запрос");
+    if($row=mysqli_fetch_array($result))
+    {
+        $title=$row["name_cat"];
+    }
+
+    $strSQL1="SELECT id_parf, image, name_parf, price,
+       parfume.id_brend, name_brend, parfume.id_cat, name_cat, parfume.id_type, name_type
+    FROM parfume, categories, type, brend WHERE parfume.id_cat=categories.id_cat AND parfume.id_brend=brend.id_brend AND parfume.id_type=type.id_type AND parfume.id_cat=".$id_cat;
+}
+
+if($type==3)
+{
+    $id_type=$_GET["id_type"];
+    $strSQL1="SELECT name_type FROM type WHERE id_type=".$id_type;
+    $result=mysqli_query($conn,$strSQL1) or die ("Не могу выполнить запрос");
+    if($row=mysqli_fetch_array($result))
+        $title=$row["name_type"];
+
+    $strSQL1="SELECT id_parf, image, name_parf, price,
+       parfume.id_brend, name_brend, parfume.id_cat, name_cat, parfume.id_type, name_type
+    FROM parfume, categories, type, brend WHERE parfume.id_cat=categories.id_cat AND parfume.id_brend=brend.id_brend  AND parfume.id_type=type.id_type AND parfume.id_type=".$id_type;
+
+}
+
+if($type==4)
+{
+    $strSQL1="SELECT id_parf, image, name_parf, price,
+       parfume.id_brend, name_brend, parfume.id_cat, name_cat, parfume.id_type, name_type
+    FROM parfume, categories, type, brend WHERE parfume.id_cat=categories.id_cat AND parfume.id_brend=brend.id_brend  AND parfume.id_type=type.id_type";
+
+}
+$result1=mysqli_query($conn, $strSQL1) or die ("че");
+
+
+?>
+
+
+
+
+    <section class="products-show" id="products">
+
+    <div class="box-container-show">
+        <?php
+        $i=0;
+        while ($row=mysqli_fetch_array($result1)):
+        ?>
+        <div class="box-show">
+            <span class="discount-show"><?php print $row["name_brend"]; ?></span>
+            <div class="image">
+                <a href="item.phtml?id_parf=<?php print  $row["id_parf"];?>"><img src="../<?php print $row["image"]; ?>" alt=""></a>
+                <div class="icons-show">
+                    <a href="#" class="fas fa-heart"></a>
+                </div>
+            </div>
+            <div class="content-show">
+                <h3><?php print $row["name_parf"]; ?></h3>
+                <div class="price-show"><?php print $row["price"]; ?> ₽</div>
+            </div>
+        </div>
+        <?php endwhile; ?>
+    </div>
+    </section>
+
+<?php  include("template/footer.phtml"); ?>

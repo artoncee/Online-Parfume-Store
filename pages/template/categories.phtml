@@ -1,0 +1,64 @@
+<?php
+$servername = "localhost";
+$database = "parfumes";
+$username = "root";
+$password = "";
+
+$conn = mysqli_connect($servername, $username, $password, $database);
+if (!$conn) {
+    die("Соединение провалено по причине: " . mysqli_connect_error());
+}
+echo "";
+mysqli_query($conn, "SET NAMES 'utf8'");
+
+$strSQL1 = "SELECT * FROM brend ORDER BY name_brend";
+$result1 = mysqli_query($conn, $strSQL1) or die("Не могу выполнить запрос");
+
+$strSQL2 = "SELECT * FROM categories ORDER BY name_cat";
+$result2 = mysqli_query($conn, $strSQL2) or die("Не могу выполнить запрос");
+
+$strSQL3 = "SELECT * FROM type ORDER BY name_type";
+$result3 = mysqli_query($conn, $strSQL3) or die("Не могу выполнить запрос");
+
+?>
+
+
+
+<div class="cat">
+    <nav class="nav">
+        <ul>
+            <li><a>Бренд</a>
+                <ul>
+                    <?php
+                    while ($row=mysqli_fetch_array($result1))
+                    {?>
+                        <li><a href="catalog.phtml?type=1&id_brend=<?php print $row["id_brend"]; ?>"><?php print $row["name_brend"]; ?></a></li>
+                    <?php }?>
+                </ul>
+            </li>
+            <li><a>Тип</a>
+                <ul>
+                    <?php
+                    while ($row=mysqli_fetch_array($result2))
+                    {?>
+                        <li><a href="catalog.phtml?type=2&id_cat=<?php print  $row["id_cat"];?>"><?php print  $row["name_cat"];?></a></li>
+                    <?php }?>
+                </ul>
+            </li>
+            <li><a>Категория</a>
+                <ul>
+                    <?php
+                    while ($row=mysqli_fetch_array($result3))
+                    {?>
+                        <li><a href="catalog.phtml?type=3&id_type=<?php print  $row["id_type"];?>"><?php print  $row["name_type"];?></a></li>
+                    <?php }?>
+                </ul>
+            </li>
+
+            <li class="all"><a href="catalog.phtml?type=4">Все товары</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<div class="credit"></div>
+

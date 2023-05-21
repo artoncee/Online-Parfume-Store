@@ -1,0 +1,60 @@
+<?php
+$type=$_GET["type"];
+$id_parf=$_GET["id_parf"];
+$id_bask=$_COOKIE["id_bask"];
+
+
+$servername = "localhost";
+$database = "parfumes";
+$username = "root";
+$password = "";
+
+$conn = mysqli_connect($servername, $username, $password, $database);
+if (!$conn) {
+    die("Соединение провалено по причине: " . mysqli_connect_error());
+}
+echo "";
+mysqli_query($conn, "SET NAMES 'utf8'");
+
+if($type==1){
+    $strSQL1="SELECT * FROM basket_parfume WHERE id_parf=".$id_parf." AND id_bask='".$id_bask."' ";
+    $result=mysqli_query($conn,$strSQL1) or die ("");
+
+    if($row=mysqli_fetch_array($result)){
+        $strSQL1="UPDATE basket_parfume SET kolvo=kolvo+1 WHERE id_parf=".$id_parf." AND id_bask='".$id_bask."' ";
+    }
+    else{
+        $strSQL1="INSERT INTO basket_parfume(id_bask, id_parf, kolvo) VALUES ('".$id_bask."', '".$id_parf."', 1)";
+    }
+    mysqli_query($conn, $strSQL1);
+}
+
+else
+    if($type==2)
+    {
+        $strSQL1="SELECT * FROM basket_parfume WHERE id_parf=".$id_parf." AND id_bask='".$id_bask."' ";
+        $result=mysqli_query($conn,$strSQL1) or die ("");
+
+        if($row=mysqli_fetch_array($result)){
+            if($row["kolvo"]>1){
+                $strSQL1="UPDATE basket_parfume SET kolvo=kolvo-1 WHERE id_parf=".$id_parf." AND id_bask='".$id_bask."' ";
+            }
+            else{
+                $strSQL1="DELETE FROM basket_parfume WHERE id_parf=".$id_parf." AND id_bask='".$id_bask."' ";
+            }
+        }
+        mysqli_query($conn, $strSQL1);
+    }
+    else
+        if($type==3){
+            $strSQL1="DELETE FROM basket_parfume WHERE id_parf=".$id_parf." AND id_bask='".$id_bask."' ";
+            mysqli_query($conn, $strSQL1);
+        }
+        else
+            if($type==4){
+                $strSQL="DELETE FROM basket_parfume WHERE  id_bask='".$id_bask."' ";
+                mysqli_query($conn, $strSQL);
+            }
+include ("basket.phtml")
+?>
+

@@ -1,0 +1,183 @@
+create database parfumes;
+use parfumes;
+
+create table brend
+(
+    id_brend int(5) primary key auto_increment,
+    name_brend varchar(50),
+    country varchar(50)
+);
+
+insert into brend (name_brend, country) values ('Jo Malone', 'Франция');
+insert into brend (name_brend, country) values ('Amouage', 'Оман');
+insert into brend (name_brend, country) values ('Le Labo', 'Америка');
+insert into brend (name_brend, country) values ('Gucci', 'Италия');
+insert into brend (name_brend, country) values ('Yves Saint Laurent', 'Франция');
+insert into brend (name_brend, country) values ('Versace Atelier', 'Италия');
+insert into brend (name_brend, country) values ('Darling*', 'Франция');
+insert into brend (name_brend, country) values ('Mandarina Duck', 'Италия');
+insert into brend (name_brend, country) values ('Mexx', 'Нидерланды');
+insert into brend (name_brend, country) values ('Zelinski & Roezen', 'Израиль');
+insert into brend (name_brend, country) values ('Pure bases', 'Россия');
+insert into brend (name_brend, country) values ('Botavikos', 'Россия');
+
+create table categories
+(
+    id_cat int(5) primary key auto_increment,
+    name_cat varchar(50)
+);
+
+insert into categories(name_cat) values ('Люксовая парфюмерия');
+insert into categories(name_cat) values ('Нишевая парфюмерия');
+insert into categories(name_cat) values ('Массмаркет');
+
+
+create table type
+(
+    id_type int(5) primary key auto_increment,
+    name_type varchar(50)
+);
+
+insert into type(name_type ) values ('Мужские ароматы');
+insert into type(name_type ) values ('Женские ароматы');
+insert into type(name_type ) values ('Унисекс');
+insert into type(name_type ) values ('Аромадиффузоры');
+insert into type(name_type ) values ('Ароматизированные гели для душа');
+
+create table parfume
+(
+    id_parf int(5) primary key auto_increment,
+    name_parf varchar (100),
+    id_brend int (5),
+    id_cat int(5),
+    id_type int(5),
+    top_notes varchar (100),
+    middle_notes varchar(100),
+    lower_notes varchar (100),
+    info varchar(400),
+    size int (3),
+    price int (5),
+    image varchar (50)
+);
+
+
+
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('intense dark amber& ginger lily', 1, 2, 2, 'черный кардамон', 'черная орхидея', 'благовония киара', 50, 11130, 'img_parf/1.jpg', 'Редкое дерево кияра. Ценное в церемонии Kohdo, японское искусство, возвышающее ладан. Обогащенный ароматами янтаря и черной орхидеи. Освещенный чистой чувственностью черного кардамона, имбиря и водяной лилии. Успокаивающий и расслабляющи');
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('lime basil & mandarin',1,2,1, 'мандарин', 'базилик', 'амбровое дерево', 30, 7560, 'img_parf/2.jpg', 'Наш фирменный аромат. Острый базилик и ароматный белый тимьян привносят неожиданный акцент в аромат лайма, развеваемый карибским ветром. Современная классика. Выдержанный стиль. Элегантный и безукоризненный. Диффузор легко и непрерывно наполняет окутывающим ароматом любое пространство.');
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('silver birch & lavender',1,2,3, 'грейпфрут', 'английская лаванда', 'белая береза', 30, 5960, 'img_parf/3.jpg', 'Лучи утреннего света пробиваются сквозь густую листву белых берез в заброшенном саду. Свежий воздух с хрустящей прохладой, пронизывающий аромат английской лаванды. Бодрящий грейпфрут, харизматичная древесная база с нотами белой березы и жженого дуба. Дерзкий и энергичный.' );
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('myrrh & tonka',1,2,5, 'черный кардамон', 'благовония киара', 'благовония киара', 250, 4700, 'img_parf/4.jpg', 'Смола дерева мирра, миндаль и ванильные ноты бобов тонка создают нежный, мягкий и дорогой аромат.' );
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('wild berry & bramble',1,2,4,'грейпфрут', 'английская лаванда', 'белая береза', 300, 10250, 'img_parf/5.jpg','Все ароматы и текстуры Jo Malone London можно использовать самостоятельно и в сочетании с другими, создавая уникальные композиции. Для того, чтобы создать бодрящую и энергичную атмосферу сочетайте Wild Berry & Bramble с росистым ароматом цветущих колокольчиков - Wild Bluebell. ' );
+
+
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('crimson rocks',2,2,2, 'розовый перец, кора деревакорицы', 'абсолю розы, роза ultimate,медовый аккорд', 'абсолю розы, роза ultimate,медовый аккорд', 100, 40610, 'img_parf/6.jpg', 'Аромат Crimson Rocks воплощает величие гор Аль-Хаджар в сумерках. Это особенный момент, когда ты стоишь на вершине и ощущаешь сладостное чувство абсолютного покоя. Для этой композиции Amouage использовал эфирное масло розы, сохраняющей свой уникальный аромат даже в самых экстремальных погодных условиях и обладающей нежным, лёгким и насыщенным звучанием.'  );
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('enclave', 2,2,1, 'кардамон, мята, розовый перец, кора дерева корицы', 'абсолю розы, пачули, ладан,ветивер', 'сафьян, амбра xtreme,экстракт лабданума', 100, 32488, 'img_parf/7.jpg', 'Это особенное мгновение, когда последние солнечные лучи исчезают за фьордами Мусандама...Enclave искусно передает атмосферу, заключённую в месте, где земля встречается с морем. Прохладные ноты мяты и кардамона пронизывают всю композицию, придавая ей свежесть, в то время как амбра, лабданум, корица и сафьяновая кожа с ветивером рисуют перед нашим взором согретые солнцем вершины гор.');
+
+
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('santal 33',3,2,1, 'австрийское сандаловое дерево,папирус','кедр,кардамон,фиалка', 'ирис,кожаный аккорд,амброксан', 100, 24510, 'img_parf/8.jpg', 'Помните классическую рекламу Marlboro? Наездник и лошадь, греющиеся у огня на бескрайней равнине под чистым вечерним небом. Картина, символизирующая дух Дикого Запада, мужественность и свободу. Ковбой с лицом, освещенным пламенем костра, прислонившийся к потертому кожаному седлу, стал настоящей легендой. Ему пытались подражать мужчины, от него были без ума женщины.');
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('baie 19',3,2,5, 'кедр', 'кардамон', 'фиалка', 237,5210,'img_parf/9.jpg', 'Честно говоря, аромат Baie 19 стоило бы назвать Water 19. Нет, не потому, что он ничем не пахнет (так, в общем-то не бывает), а за его влажный, искрящийся эффект, который вода придает земле сразу после дождя…');
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('bergamote 22',3,2,3, 'бергамот,цветы апельсина', 'петигрен,кедр','амбра,ветивер,мускусы', 50,19110,'img_parf/10.jpg', 'Яркое звучание бергамота непостижимым образом сочетает в себе свежесть, сладость и чувственность. Именно эти качества воплотились в аромате под кодовым названием Fire Cologne. В уникальной композиции слышатся нежные цветочные ноты петигрена, горечь грейпфрута, пламенная сладость амбры и мускуса, а также мужественный оттенок ветивера, придающего Bergamote 22 бросающуюся в глаза индивидуальность.');
+
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('bloom profumo di fiori', 4,1,1, 'жасмин самбак и побег в рангуне','тубероза, жасмин и иланг-иланг', 'сандал, ирис, бензоин, солнечные ноты, древесные ноты и мускус', 100, 14950, 'img_parf/11.jpg','Новая парфюмерная вода Gucci Bloom Profumo Di Fiori наполнена свежим природным зеленым характером, богатым цветочным звучанием и мягкой глубиной туберозы. Profumo di Fiori обладает соблазнительностью и магнетизмом эссенции туберозы в гармоничном сочетании с экстрактом жасмина Самбак и его нераскрывшимися бутонами.');
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('flora gorgeous gardenia',4,1,2,'груша','гардения, жасмин','коричневый сахар, пачули', 100, 14860, 'img_parf/12.jpg', 'Перенеситесь в радостную страну фантазий с ароматом Gucci Flora. Новая цветочная парфюмерная вода Gucci Flora Gorgeous Gardenia с легким сладким оттенком предстает в новой рекламной кампании в окружении цветов и пушистых животных. Культовый цветочный аромат создан для свободных духом женщин, излучающих позитивную энергию.');
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('the alchemist''s garden a kiss from violet perfumed oil', 4,1,3, 'фиалка','мускус','ирис', 20, 46520, 'img_parf/13.jpg', 'Парфюмерное масло «The Violet Kiss» Gucci открывает новую страницу в истории ароматов Дома, полную волшебства и таинства, воплощенных в новой коллекции The Alchemist’s Garden. Вдохновленный алхимией, Алессандро Микеле переосмысливает идею получения золота из различных металлов. Он превращает алхимию в искусство получения ароматов и создает семь композиций парфюмерной воды.');
+
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('black opium', 5,1,2, 'груша, жасмин, розовый перец', 'кофе, горький миндаль, лакричник', 'ваниль, пачули, белый кедр', 90, 17280, 'img_parf/14.jpg', 'Black Opium - аромат в стиле глэм-рок, который вызывает настоящую зависимость! Ароматы кофе и цветов провоцируют выработку адреналина, ваниль дарит сладкую чувственность. Игра противоположностей - горького и сладкого, ароматов, никогда ранее не использованных вместе в такой концентрации в парфюме для женщин, дарит ощущение невесомости,граничащего с восторгом.');
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('y',5,1,1, 'шалфей','бобы тонка','розовый перец', 100, 14920, 'img_parf/15.jpg','Y EAU DE PARFUM это глубокий и яркий аромат для мужчины, который осмелился поверить в себя и идет за мечтой. Шалфей и герань сливается с магнетическим соблазном глубоких древесных нот, в обрамлении бобов тонка.');
+
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('cedrat de diamante',6,1,2,'итальянский цитрон','розовый грейпфрут','ветивер и кедр',100,28980,'img_parf/16.jpg','Композиция CEDRAT DE DIAMANTE, погружающая в атмосферу Средиземноморья, построена вокруг одновременно пикантной и свежей ноты итальянского цитрона, который обладает более цветочным и сладким ароматом, чем у обычного лимона.' );
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('figue blanche',6,1,1,'инжир','итальянский мандарин','розовый грейпфрут', 100, 28980,'img_parf/17.jpg', 'Аромат FIGUE BLANCHE вызывает ассоциации с тёплым и солнечным Средиземноморским летом. Пленительная и согревающая композиция ATELIER VERSACE с солирующей нотой инжира раскрывает разные грани. С одной стороны — кремовая сладость спелого, согретого средиземноморским солнцем фрукта. С другой — бодрящая свежесть зелени. ' );
+
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('eau de parfum citopia', 7,3,1, 'альдегидный бленд, ландыш','ирис','дымнo-дpeвecный aккopд', 50,4900, 'img_parf/18.jpg', 'CITOPIA — это одновременно и о рациональном, и о романтичном в каждом из нас. Это ода любви к жизни в большом городе: к садам среди небоскрёбов, случайным встречам и неожиданным сокровищам, которые можно обнаружить, если остановиться и посмотреть вокруг.');
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('eau de parfum rhubay',7,3,2, 'маракуйя','фрезия','ваниль, амбра',50,4900,'img_parf/19.jpg','Если бы ты могла заключить в сосуд всплеск эйфории от яркой и классной вечеринки, это был бы флакон RHUBAY. Этот аромат всегда будет вызывать у тебя улыбку, пробуждая воспоминания о самых бурных романах и сокровенных удовольствиях.');
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('eau de parfum e-motion',7,3,3, 'лиcт фиaлки','ром, лист инжира','пачули, бобы тонка',50,4150,'img_parf/20.jpg', 'Заскучать, когда тебя захлестывает E-MOTION? Это решительно невозможно! Этот яркий, напоминающий о лете аромат перенесет тебя в тропический рай и создаст иллюзию отпуска 24/7.');
+
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('into the jungle',8,3,1, 'ревень, лаванда, розмарин, сочный мандарин и лимон','пион, роза, гардения, фиалка и вишневый цвета','амбра, дубовый мох, мускус и таитянский ветивер', 100,3300,'img_parf/21.jpg', 'Туалетная вода INTO THE JUNGLE – это смелая и экзотическая композиция для бесстрашных искателей приключений. В ароматных джунглях переплетаются ноты ревеня, лаванды, розмарина, сочных мандарина и лимона.');
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('freedomland',8,3,2, 'жасмин, розовый перец','мята, ананас','лиcт фиaлки',100,3300, 'img_parf/22.jpg','Аромат FREEDOMLAND от MANDARINA DUCK создан для тех, кто выбирает свободу и дух бесконечного веселья. В атмосферу музыкального фестиваля, ошеломляющего зажигательной музыкой и яркими красками, погружают искрящиеся ноты апельсина, лимона, ананаса, клубники, базилика и мяты.');
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('resort lovers',8,3,3, 'бергамот и листья фиалки, свежий акватический аккорд','роза, ландыш и османтус','нагармота, бобы тонка и пачули', 100,3150, 'img_parf/23.jpg','Наслаждение моментом продлевают ноты розы, ландыша и османтуса, формирующие гармонию в сердце аромата MANDARINA DUCK. Все заботы исчезают – остаются лишь море, природа и умиротворяющие базовые ноты нагармоты, бобов тонка и пачули. Семейство аромата: мускусный, цветочный, акватический.');
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('skin protector hero sing in the shower',8,3,5, 'инжир','итальянский мандарин','розовый грейпфрут',100,700, 'img_parf/24.jpg','Мягкий парфюмированный гель для душа MANDARINA DUCK бережно и тщательно очищает кожу, оставляя на ней приятный аромат, который вдохновит вас петь в душе! Нежная формула, включающая глицерин и сок алоэ для увлажнения кожи, идеально подходит для ежедневного использования.' );
+
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('whenever wherever for her',9,3,1, 'ваниль, кедр и мускус','фиалка','груша, трава и мандарин',30,2750, 'img_parf/25.jpg', 'Туалетная вода Mexx Whenever Wherever for Her мгновенно заряжает невероятной энергией. Начальные ноты композиции Whenever Wherever for Her раскрываются сочностью груши с мандариновыми оттенками, которые гармонично сочетаются со свежестью зелени.');
+
+
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('black pepper & amber, neroli',10,2,3, 'черный перец','ветивер','нероли',50,6360,'img_parf/26.jpg','Аромат категории унисекс.Долго сохраняется на коже, оставляя легкий шлейф.');
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('vetiver & lemon, bergamot',10,2,3, 'ветивер','лимон','бергамот',50, 6360, 'img_parf/27.jpg', 'Аромат категории унисекс.Долго сохраняется на коже, оставляя легкий шлейф.');
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('vanilla blend', 10,2,4, ' табак','ваниль','шафран', 215, 7600,'img_parf/28.jpg','Диффузор — средство для ароматизации помещений. В комплект входят ротанговые палочки-аппликаторы. Особенностью диффузоров Zielinski & Rozen является чистый этиловый спирт в составе, который используется в пищевой промышленности, медицине и не имеет вредных испарений. ');
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('818', 10,2,4, ' пачули','ладан','древесный корень', 215, 7600,'img_parf/29.jpg','Диффузор — средство для ароматизации помещений. В комплект входят ротанговые палочки-аппликаторы. Особенностью диффузоров Zielinski & Rozen является чистый этиловый спирт в составе, который используется в пищевой промышленности, медицине и не имеет вредных испарений. ');
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('bergamot & neroli, orange', 10,2,4, ' бергамот','нероли','апельсин', 215, 7600,'img_parf/30.jpg','Диффузор — средство для ароматизации помещений. В комплект входят ротанговые палочки-аппликаторы. Особенностью диффузоров Zielinski & Rozen является чистый этиловый спирт в составе, который используется в пищевой промышленности, медицине и не имеет вредных испарений. ');
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('vetiver, lemon, orange', 10,2,5, 'ветивер','лимон','апельсин', 300, 2130,'img_parf/31.jpg','Гель для душа создан для наслаждения минутами наедине с самим собой. В его составе большое количество натуральных масел, что делает нанесение на кожу более легким и приятным, при этом обогащает её витаминами, нормализует гидробаланс, восстанавливает тонус и жизненные силы. Имеет приятную легкую пену.');
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('orange & jasmine', 10,2,5, 'апельсин','жасмин','нероли', 300, 2130,'img_parf/32.jpg','Гель для душа создан для наслаждения минутами наедине с самим собой. В его составе большое количество натуральных масел, что делает нанесение на кожу более легким и приятным, при этом обогащает её витаминами, нормализует гидробаланс, восстанавливает тонус и жизненные силы. Имеет приятную легкую пену.');
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('osemary & lemon, neroli', 10,2,5, 'розмарин','лимон','нероли', 300, 2130,'img_parf/33.jpg','Гель для душа создан для наслаждения минутами наедине с самим собой. В его составе большое количество натуральных масел, что делает нанесение на кожу более легким и приятным, при этом обогащает её витаминами, нормализует гидробаланс, восстанавливает тонус и жизненные силы. Имеет приятную легкую пену.');
+
+
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('alpine water', 11,3,4, 'сиринга','боярышник','вистерия',100,1150, 'img_parf/34.jpg','Освежающий, легкий и ненавязчивый аромат PURE BASES. Прохладные цитрусовые оттенки, запах чистоты, ледяной воды и первого снега. Аромат придется по вкусу ценителям жизни без границ и легкости.Он гармоничен в светлых просторных помещениях, а также подойдет для ванной комнаты.');
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('bergamot & verbena', 11,3,4, 'бергамот','вербена','сиринга',100,1150, 'img_parf/35.jpg','Освежающий, легкий и ненавязчивый аромат PURE BASES. Прохладные цитрусовые оттенки, запах чистоты, ледяной воды и первого снега. Аромат придется по вкусу ценителям жизни без границ и легкости.Он гармоничен в светлых просторных помещениях, а также подойдет для ванной комнаты.');
+
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('здравец-мята',12,3,4, 'мята','здравец','крапива',100,703,'img_parf/36.jpg', 'Сильный брутальный аромат, он покоряет своей леденящей харизмой, не оставляющей сомнений. Постепенно мы узнаем его лучше. Аромат раскрывается короткоживущими прозрачными нотами лимона и лайма с сочной пряной кислинкой и грушанки — проникающей, свежей, зеленой со студеным холодком ментола.');
+insert into parfume (name_parf, id_brend, id_cat, id_type, top_notes, middle_notes, lower_notes, size, price, image, info) values ('гальбанум-тимьян',12,3,4, 'тимьян','гальбанум','ментол',100,703,'img_parf/37.jpg','Замысловатый хитрый аромат, сложно поспорить с его травянистостью зеленого сочного луга. Мимо проносятся свежие влажные потоки лайма, бергамота и лимона, оставляя за собой уютную лакомую сладость.');
+
+create table basket_parfume
+(
+    id_bask char(15),
+    id_parf int(5),
+    kolvo int(2),
+    date_bask date
+);
+
+create table customers
+(
+    id_cust int(5) primary key auto_increment,
+    fam varchar(30),
+    im varchar(30),
+    addr varchar(100),
+    mail varchar(30),
+    login varchar(10),
+    pass varchar(10),
+    subscribe int(1)
+);
+
+create table orders
+(
+    id_order char(15),
+    date_ord date,
+    id_cust int(5),
+    dostavka int(1),
+    bonus int(5)
+);
+
+create table order_parfume
+(
+    id_order char(15),
+    id_parf int(5),
+    kolvo int(2)
+);
+
+
+
+
+
+<?php
+        if(isset($_SESSION["login"])){
+            ?>
+
+            <div class="fio">
+                <nav class="nav">
+                    <ul>
+                        <li><a href="../pages/cabinet.phtml" class="fas fa-user"></a>
+                            <ul>
+                                <li><a><?php print $_SESSION["login"]; ?></a></li>
+                                <li><a>Выйти</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+        <?php
+        }
+        else{
+            ?>
+            <a href="../pages/login.phtml" class="fas fa-user"></a>
+        <?php
+        }
+        ?>
+

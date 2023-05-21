@@ -1,0 +1,100 @@
+<?php include ("template/header.phtml")?>
+
+<?php
+$servername = "localhost";
+$database = "parfumes";
+$username = "root";
+$password = "";
+
+$conn = mysqli_connect($servername, $username, $password, $database);
+if (!$conn) {
+    die("Соединение провалено по причине: " . mysqli_connect_error());
+}
+echo "";
+mysqli_query($conn, "SET NAMES 'utf8'");
+
+
+
+
+$id_bask=$_COOKIE["id_bask"];
+$title="Ваша корзина";
+
+
+
+$strSQL1="SELECT COUNT(*) as count FROM basket_parfume WHERE id_bask='".$id_bask."' ";
+$result1=mysqli_query($conn, $strSQL1) or die("");
+$row=mysqli_fetch_array($result1);
+if($row["count"]==0){
+    ?>
+    <div class="nobask"><a>Ваша корзина пуста</a></div>
+<?php }
+else
+{
+    $strSQL1="SELECT name_brend, name_parf, size, price, image, parfume.id_parf, kolvo, id_bask FROM parfume, basket_parfume, brend WHERE parfume.id_brend=brend.id_brend AND parfume.id_parf=basket_parfume.id_parf AND id_bask='".$id_bask."'";
+    $result1=mysqli_query($conn, $strSQL1) or die("");
+}
+?>
+<?php
+ $sum=0;
+ $discount=0;
+ while ($row=mysqli_fetch_array($result1)){
+?>
+
+<link rel="stylesheet" href="../css/basket.css">
+<div class="hg">пробел</div>
+<section class="shopp">
+<div class="shopping-cart">
+
+    <div class="item">
+
+        <div class="image">
+            <img src="../<?php print $row["image"];?>" alt="" />
+        </div>
+
+        <div class="description">
+            <br><a>Бренд: <?php print $row["name_brend"];?></a></br>
+            <br><a><?php print $row["name_parf"];?></a></br>
+            <br><a>объем: <?php print $row["size"];?> мл</a></br>
+        </div>
+
+        <div class="quantity">
+            <a class="plus" href="dobasket.phtml?type=1&id_parf=<?php print $row["id_parf"]; ?>">+</a>
+            <div><a class="kolvo"><?php print $row["kolvo"];?></a></div>
+            <a class="minus" href="dobasket.phtml?type=2&id_parf=<?php print $row["id_parf"]; ?>">-</a>
+        </div>
+
+        <div class="del">
+            <a  href="dobasket.phtml?type=3&id_parf=<?php print $row["id_parf"]; ?>" class="btn">Удалить товар</a>
+            <div class="total-price">Стоимость: <?php print $row["price"];?> ₽</div>
+
+        </div>
+
+
+    </div>
+</div>
+</section>
+     <?php $sum=$sum+$row["price"]*$row["kolvo"]; ?>
+ <?php }?>
+     <div class="credit"></div>
+     <?php if($sum<=15000){ ?>
+     <a class="sum"><span>Итоговая сумма: </span><?php  print $sum;?> ₽</a>
+     <?php }
+     else {?>
+         <a class="dissum"><span>Итоговая сумма: </span><span class="a"><?php print $sum;?></span>  <span class="aa"><?php $discount=$sum/10; $sum=$sum-$discount; print $sum;?> ₽</span></a>
+         <div><a class="dissumm"><span>ваша скидка составляет 10%</span></a></div>
+     <?php }?>
+
+<?php
+$strSQL1="SELECT COUNT(*) as count FROM basket_parfume WHERE id_bask='".$id_bask."' ";
+$result1=mysqli_query($conn, $strSQL1) or die("");
+$row=mysqli_fetch_array($result1);
+if($row["count"]!=0){ ?>
+<section>
+    <a class="btn-ord" href="order.phtml">Оформить заказ</a>
+</section>
+
+
+
+
+
+<?php } //include ("template/footer.phtml")?>

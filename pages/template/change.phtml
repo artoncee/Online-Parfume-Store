@@ -1,0 +1,36 @@
+<?php
+
+$servername = "localhost";
+$database = "parfumes";
+$username = "root";
+$password = "";
+
+$conn = mysqli_connect($servername, $username, $password, $database);
+
+
+$fam =$_POST["fam"];
+$im =$_POST["im"];
+$addr =$_POST["addr"];
+$mail =$_POST["mail"];
+$id =$_SESSION["id"];
+
+$message="";
+if($fam!="" && $im!="" && $addr!="" && $mail!="" ){
+
+    $replace_symbols=['<', '>', 'script'];
+    $fam =str_replace($replace_symbols, "", $_POST["fam"]);
+    $im =str_replace($replace_symbols, "", $_POST["im"]);
+    $addr =str_replace($replace_symbols, "", $_POST["addr"]);
+    $mail =str_replace($replace_symbols, "", $_POST["mail"]);
+
+    $strSQL1="UPDATE customers SET fam='".$fam."', im='".$im."', addr='".$addr."', mail='".$mail."' WHERE id_cust=".$id;
+    $result1=mysqli_query($conn, $strSQL1) or die(" ");
+    $_SESSION["login"]=$fam."".$im;
+    $message="Изменения прошли успешно";
+}
+else
+    $message="Не все поля заполнены, вернитесь назад";
+print ($message);
+?>
+
+

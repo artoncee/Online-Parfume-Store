@@ -1,0 +1,99 @@
+<?php include ("template/header.phtml"); ?>
+
+<?php
+$fam=$_POST["fam"];
+$im=$_POST["im"];
+$addr=$_POST["addr"];
+$mail=$_POST["mail"];
+$pass=$_POST["pass"];
+$pass2=$_POST["pass2"];
+$log=$_POST["log"];
+$type=$_POST["type"];
+$subscribe=$_POST["subscribe"];
+
+$servername = "localhost";
+$database = "parfumes";
+$username = "root";
+$password = "";
+
+
+$message="";
+$success=false;
+
+$conn = mysqli_connect($servername, $username, $password, $database);
+if (!$conn) {
+    die("Соединение провалено по причине: " . mysqli_connect_error());
+}
+echo "";
+mysqli_query($conn, "SET NAMES 'utf8'");
+
+if($type==1){
+    if($fam!="" && $im!="" && $mail!="" && $log!="" && $pass!="" && $pass2!=""){
+
+        if(strpos($fam, "<")!==false || strpos($im, "<")!==false || strpos($mail, "<")!==false || strpos($log, "<")!==false || strpos($pass, "<")!==false || strpos($pass2, "<")!==false){
+            $message="Вы пытаетесь взломать сайт?";
+        }
+        else if(strpos($fam, ">")!==false || strpos($im, ">")!==false || strpos($mail, ">")!==false || strpos($log, ">")!==false || strpos($pass, ">")!==false || strpos($pass2, ">")!==false){
+            $message="Вы пытаетесь взломать сайт?";
+        }
+
+        else if($pass!=$pass2){
+            $message="Пароли не совпадают";
+        }
+        else
+        {
+            $strSQL1="SELECT id_cust FROM customers WHERE login='".$log."'";
+            $result1=mysqli_query($conn,$strSQL1) or die("");
+            if($row=mysqli_fetch_array($result1)){
+                $message="Выберите другой логин, такой уже существует";
+            }
+            else{
+                $strSQL1="INSERT INTO customers(fam, im, addr, mail, login, pass, subscribe) VALUES ('".$fam."','".$im."','".$addr."','".$mail."','".$log."','".$pass."','".$subscribe."')";
+                $result1=mysqli_query($conn,$strSQL1) or die ("");
+                $message="Вы успешно зарегистрировааны";
+                $success=true;
+            }
+        }
+    }
+    else{
+       $message="Не все поля заполнены";
+    }
+}
+?>
+    <a class="message"><?php print $message; ?></a>
+<?php
+if(!$success)
+{
+?>
+        
+
+<section class="contact" id="contact">
+    <div class="row">
+        <form action="registration.phtml" method="post">
+            <input type="text" name="fam" value="<?php print $fam ?>" placeholder="Фамилия" class="box">
+            <input type="text" name="im" value="<?php print $im ?>" placeholder="Имя" class="box">
+            <input type="text" name="addr" value="<?php print $addr ?>" placeholder="Адрес" class="box">
+            <input type="text" name="mail" value="<?php print $mail?>" placeholder="Е-mail" class="box">
+            <input type="text" name="log" value="<?php print $log?>" placeholder="Логин" class="box">
+            <input type="password" name="pass" value="" placeholder="Пароль" class="box">
+            <input type="password" name="pass2" value="" placeholder="Повтор пароля" class="box">
+            <td><input type="checkbox" value="1" name="subscribe">
+                <i>Подписаться на рассылку новостей</i>
+            </td>
+            <input type="hidden" value="1" name="type">
+            <input type="submit" value="Отправить" class="btn-log">
+        </form>
+
+        <div class="image">
+            <img src="../images/call.png" alt="">
+        </div>
+    </div>
+</section>
+
+
+<?php
+mysqli_close($conn);
+}
+
+include ("template/footer.phtml");
+?>

@@ -1,0 +1,222 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background-color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+.shopp{
+
+}
+.shopping-cart {
+    width: 60rem;
+    height: 15rem;
+    margin-top: 2rem;
+    margin-left: 20rem;
+
+    background: #FFFFFF;
+    box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.10);
+    border-radius: 6px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.image{
+    width: 10rem;
+    height: 10rem;
+    position: absolute;
+    text-align: center;
+    padding-top: 1rem;
+    padding-left: .25rem;
+
+    overflow: hidden;
+}
+
+.image img{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.item {
+    padding: 20px 30px;
+    height: 100px;
+    display: flex;
+}
+
+.item:nth-child(3) {
+    border-top:  1px solid #E1E8EE;
+    border-bottom:  1px solid #E1E8EE;
+}
+
+
+.like-btn {
+    display: inline-block;
+    Cursor: pointer;
+}
+.delete-btn {
+    width: 18px;
+    height: 17px;
+}
+
+.like-btn {
+    position: absolute;
+    top: 9px;
+    left: 15px;
+    width: 60px;
+    height: 60px;
+    background-size: 2900%;
+    background-repeat: no-repeat;
+}
+
+.description{
+    font-size: 1rem;
+    position: absolute;
+    padding-left: 13rem;
+}
+.description а{
+
+    font-size: 2rem;
+}
+
+.quantity {
+    position: absolute;
+    padding-top: 1.15rem;
+    padding-left: 31rem;
+}
+.quantity div{
+    position: absolute;
+    padding: .5rem 5rem .5rem;
+    margin-top: .1rem;
+    margin-left: 9rem;
+    border:1px solid darkorange;
+    display: -moz-inline-stack;
+    display: inline-block;
+    vertical-align: top;
+    *display: inline;
+}
+.quantity .kolvo{
+
+    font-size: 1.5rem;
+    color: #333333;
+    text-transform: uppercase;
+
+}
+
+.total-price{
+    font-size: 1.5rem;
+    position: absolute;
+    padding-left: 13rem;
+    padding-top: 8.5rem;
+}
+
+.del .btn{
+    position: absolute;
+    display:inline-block ;
+    border-radius: 5rem;
+    background: #333333;
+    color: #eeeeee;
+    padding: .75rem 4.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 8rem;
+    margin-left: 38rem;
+}
+
+.btn:hover{
+    background: mediumslateblue ;
+}
+
+.credit{
+    text-align: center;
+    padding: 2.5rem;
+    margin-top: 0;
+    padding-top: .75rem;
+    font-size: 2rem;
+    color: #333333;
+    border-top: .1rem solid rgba(0,0,0,.1);
+}
+
+.quantity .plus{
+    position: absolute;
+    padding-top: .25rem;
+    left: 38rem;
+    font-size: 2rem;
+    color: #666666;
+}
+.quantity .plus:hover{
+    color: mediumslateblue;
+}
+
+.quantity .minus:hover{
+    color: mediumslateblue;
+}
+.quantity .minus{
+    position: absolute;
+    padding-top: .25rem;
+    left:52rem;
+    font-size: 2.25rem;
+    color: #666666;
+}
+
+.hg{
+    height: 5rem;
+    color: white;
+}
+
+.sum span{
+    color: mediumslateblue;
+}
+
+.sum{
+    margin-left: 33rem;
+    font-size: 2rem;
+}
+
+.dissumm{
+    position: absolute;
+    margin-top: 2rem;
+    margin-left: 33rem;
+    font-size: 1.75rem;
+}
+
+.dissumm span{
+    color: #666666;
+}
+.dissum{
+    margin-left: 33rem;
+    font-size: 2rem;
+}
+.dissum span{
+    color: mediumslateblue;
+}
+.dissum .a{
+    text-decoration-line:line-through ;
+    font-size: 1.75rem;
+    color: #666666;
+}
+
+.dissum .aa{
+
+    font-size: 2.25rem;
+    color: #333333;
+}
+
+.nobask{
+    align-items: center;
+    margin-top: 10rem;
+}
+
+.nobask td a{
+    font-size: 2rem;
+    color: mediumslateblue;
+
+}

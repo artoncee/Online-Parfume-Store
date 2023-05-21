@@ -1,0 +1,40 @@
+<?php header("Contenr-type: text/xml");
+print "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>";
+
+$servername = "localhost";
+$database = "parfumes";
+$username = "root";
+$password = "";
+
+$conn = mysqli_connect($servername, $username, $password, $database);
+if (!$conn) {
+    die("Соединение провалено по причине: " . mysqli_connect_error());
+}
+echo "";
+
+
+
+$strSQL1="SELECT * FROM brend ORDER BY name_brend";
+$result1=mysqli_query($conn, $strSQL1) or die ("Не могу выполнить запрос");
+
+print "<прайс-лист>";
+while ($row=mysqli_fetch_array($result1)){
+    print "<Бренд
+    код='".$row["id_brend"]."'>".$row["name_brend"];
+
+    $strSQL2 = "SELECT id_parf, name_brend, name_parf, size, price, name_cat  
+FROM parfume, brend, categories WHERE parfume.id_cat=categories.id_cat and parfume.id_brend=brend.id_brend AND brend.id_brend=" . $row["id_brend"];
+    $result2=mysqli_query($conn, $strSQL2) or die ("Не могу выполнить запрос");
+
+    while ($row2=mysqli_fetch_array($result2)){
+        print "<Парфюм имя='".$row2["name_parf"]."'>";
+        print "<Объем>".$row2["size"]."</Объем>";
+        print "<Цена>".$row2["price"]."</Цена>";
+        print "<Категория>".$row2["name_cat"]."</Категория>";
+        print "</Парфюм>";
+    }
+    print "</Бренд>";
+}
+print "</прайс-лист>";
+mysqli_close();
+?>
