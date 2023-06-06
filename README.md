@@ -13,7 +13,7 @@
 
 
 # Категории
-![categories](https://github.com/artoncee/Onlin-Parfume-Store/assets/109976577/f609a726-c92f-4459-996d-488ce1747a50)
+![image](https://github.com/artoncee/Online-Parfume-Store/assets/109976577/d74f8a18-77df-41eb-baee-7e40845b8ad7)
 
 
 # Страница парфюма
