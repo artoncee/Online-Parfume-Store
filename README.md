@@ -29,7 +29,7 @@
 
 
 # Заказ
-![oreder](https://github.com/artoncee/Onlin-Parfume-Store/assets/109976577/67831ffc-f5ee-4540-9f6e-c063d58d8d17)
+![image](https://github.com/artoncee/Online-Parfume-Store/assets/109976577/41ebf0af-66b1-4158-b140-28f6a9cd5d97)
 
 
 # Регистрация
