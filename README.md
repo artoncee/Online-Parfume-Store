@@ -21,7 +21,7 @@
 
 
 # Страница парфюма (продолжение)
-![item1](https://github.com/artoncee/Onlin-Parfume-Store/assets/109976577/3dc576d2-e639-4469-9d67-90b6d1784ad2)
+![image](https://github.com/artoncee/Online-Parfume-Store/assets/109976577/c1617425-72fc-435e-a038-ac7a795ddfe7)
 
 
 # Корзина
@@ -37,7 +37,7 @@
 
 
 # Авторизация
-![auth](https://github.com/artoncee/Onlin-Parfume-Store/assets/109976577/d78eef34-368d-4d10-a6e4-e5fe5a5aaa6a)
+![image](https://github.com/artoncee/Online-Parfume-Store/assets/109976577/2d0169ad-cf8d-460f-9ca1-7a4931ff1060)
 
 
 # Личный кабинет
